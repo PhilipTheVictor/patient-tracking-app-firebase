@@ -7,7 +7,12 @@ import firebase from 'firebase'
 
 // Initialize Firebase
 var config = {
-  // paste your config from Firebase Web Setup here
+  apiKey: "AIzaSyB2924y1RXrxSpLediJ3rDPyxnwue6laZE",
+  authDomain: "peekaboo-guru-f8b71.firebaseapp.com",
+  databaseURL: "https://peekaboo-guru-f8b71.firebaseio.com",
+  projectId: "peekaboo-guru-f8b71",
+  storageBucket: "peekaboo-guru-f8b71.appspot.com",
+  messagingSenderId: "481781432314"
 };
 firebase.initializeApp(config);
 
@@ -30,7 +35,7 @@ export default class ptafirebase extends Component {
 }
 
 const SimpleApp = StackNavigator({
-  Main: { screen: ptafirebase },
+  Main: { screen: PatientsList },
   Home: { screen: MainComponent },
   Dashboard: { screen: DashboardComponent },
   Reg: { screen: RegisterComponent },

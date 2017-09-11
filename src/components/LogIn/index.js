@@ -7,8 +7,9 @@ export class LogInComponent extends Component {
 
     constructor(props) {
         super(props);
-        this.logInUser = this.logInUser.bind(this);
+
         this.state = { email: '', password: '' }
+        this.logInUser = this.logInUser.bind(this);
 
 
     }

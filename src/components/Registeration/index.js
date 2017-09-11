@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, AsyncStorage } from 'react-native'
 import { CardSection, Button, Input } from '../.././common'
-
+import firebase from 'firebase'
 
 export class RegisterComponent extends Component {
 
@@ -13,6 +13,18 @@ export class RegisterComponent extends Component {
     }
 
     saveData() {
+        firebase.database().ref('/patients/').push().set({
+            name: this.state.name,
+            email: this.state.email,
+            disease: this.state.disease,
+            age: this.state.age
+        })
+            .then(() => {
+                alert("Patient successfully registered")
+            })
+            .catch((err) => {
+                alert(err.message)
+            })
     }
     render() {
         const { navigate } = this.props.navigation;

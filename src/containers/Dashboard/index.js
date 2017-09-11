@@ -40,7 +40,7 @@ export class DashboardComponent extends Component {
                         <CardSection>
                             <Button onPress={() => alert("You have signed out successfully")}>
                                 Sign Out
-                        {/* <Image source={require('./icon3.png')} style={styles.img} /> */}
+                       
                             </Button>
                         </CardSection>
                     </View>
