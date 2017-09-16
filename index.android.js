@@ -35,7 +35,7 @@ export default class ptafirebase extends Component {
 }
 
 const SimpleApp = StackNavigator({
-  Main: { screen: PatientsList },
+  Main: { screen: ptafirebase },
   Home: { screen: MainComponent },
   Dashboard: { screen: DashboardComponent },
   Reg: { screen: RegisterComponent },
