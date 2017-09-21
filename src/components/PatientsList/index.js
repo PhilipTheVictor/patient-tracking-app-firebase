@@ -10,6 +10,8 @@ export class PatientsList extends Component {
     }
     constructor(props) {
         super(props);
+        console.disableYellowBox = true;
+        this.searchByDate = this.searchByDate.bind(this);
         this.searchByName = this.searchByName.bind(this);
         this.state = {
             normalState: true,
@@ -20,17 +22,8 @@ export class PatientsList extends Component {
 
     componentWillMount() {
         let database = firebase.database().ref('patients')
-        // database.on('child_added', (snap) => {
-        //     let keys = snap.val();
-        //     console.log('keys', keys)
-        //     // for (var data in keys) {
-        //     //     arr.push(keys[data])
-        //     // }
-        //     this.setState({ arrdata: keys })
-
-        // })
         database.on('child_added', snap => {
-            arrayToPushedData = this.state.arrdata;
+            let arrayToPushedData = this.state.arrdata;
             arrayToPushedData.push(snap.val());
             this.setState({
                 status: true,
@@ -41,9 +34,9 @@ export class PatientsList extends Component {
     }
 
     searchByName(text) {
-        var arrayToPushedData = this.state.arrdata;
+        arrayToPushedData = this.state.arrdata;
         this.setState({ searchedVal: text })
-        var arrayToPushedData = arrayToPushedData.filter((asset) => asset.name.toLowerCase().indexOf(text) !== -1);
+        arrayToPushedData = arrayToPushedData.filter((asset) => asset.name.toLowerCase().indexOf(text) !== -1);
 
         if (text == '') {
             this.setState({
@@ -61,6 +54,29 @@ export class PatientsList extends Component {
             })
         }
     }
+    searchByDate(date) {
+        this.setState({
+            date: date
+        })
+        arrayToPushedData = this.state.data;
+        this.setState({ date: date })
+       arrayToPushedData = arrayToPushedData.filter(asset => asset.date.indexOf(date) !== -1);
+
+        if (date == '') {
+            this.setState({
+                normalStatus: true,
+                filterStatus: false
+            })
+
+        }
+        else {
+            this.setState({
+                filterStatus: true,
+                normalStatus: false,
+                filterData: arrayToPushedData
+            })
+        }
+    }
 
     render() {
         const { navigate } = this.props.navigation;
@@ -68,8 +84,11 @@ export class PatientsList extends Component {
         return (
             <Container>
                 <Content>
+                <InputGroup>
+                        <Input onChangeText={(date) => this.searchByDate(date)} placeholder="Search By Date"/>
+                    </InputGroup>
                     <InputGroup>
-                        <Input onChangeText={(text) => this.searchByName(text)} />
+                        <Input onChangeText={(text) => this.searchByName(text)}  placeholder="Search By Name"/>
                     </InputGroup>
                     <List>
                         {this.state.normalState &&
@@ -80,6 +99,7 @@ export class PatientsList extends Component {
                                         <Text>{d.age}</Text>
                                         <Text>{d.email}</Text>
                                         <Text>{d.disease}</Text>
+                                        <Text>{d.date}</Text>
                                     </ListItem>
 
                                 )
@@ -94,6 +114,7 @@ export class PatientsList extends Component {
                                         <Text>{d.age}</Text>
                                         <Text>{d.email}</Text>
                                         <Text>{d.disease}</Text>
+                                        <Text>{d.date}</Text>
                                     </ListItem>
 
                                 )})

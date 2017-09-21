@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, View } from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation'
-import { LogInComponent, SignUpComponent, PatientsList, MainComponent, DashboardComponent, RegisterComponent, SearchByDateComponent, SearchByNameComponent } from './src'
+import { LogInComponent, SignUpComponent, PatientsList, MainComponent, DashboardComponent, RegisterComponent } from './src'
 import { CardSection, Button, Card } from './src/common'
 import firebase from 'firebase'
 
@@ -36,11 +36,9 @@ export default class ptafirebase extends Component {
 
 const SimpleApp = StackNavigator({
   Main: { screen: ptafirebase },
-  Home: { screen: MainComponent },
+  Home: { screen: DashboardComponent },
   Dashboard: { screen: DashboardComponent },
   Reg: { screen: RegisterComponent },
-  SearchD: { screen: SearchByDateComponent },
-  SearchN: { screen: SearchByNameComponent },
   PatientsList: { screen: PatientsList },
   LogIn: { screen: LogInComponent },
   SignUp: { screen: SignUpComponent }

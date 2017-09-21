@@ -7,17 +7,25 @@ export class RegisterComponent extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { name: '', email: '', disease: '', age: '' }
+        console.disableYellowBox = true;
+        this.state = { name: '', email: '', disease: '', age: '', date: '' }
         this.saveData = this.saveData.bind(this);
 
     }
 
     saveData() {
+        let date = new Date();
+        let today = date.getDate();
+        let month = date.getMonth();
+        let year = date.getFullYear();
+        let fullDate = today + '/' + month + '/' + year;
+        console.log('date', fullDate);
         firebase.database().ref('/patients/').push().set({
             name: this.state.name,
             email: this.state.email,
             disease: this.state.disease,
-            age: this.state.age
+            age: this.state.age,
+            date: fullDate
         })
             .then(() => {
                 alert("Patient successfully registered")

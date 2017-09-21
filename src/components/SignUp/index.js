@@ -18,6 +18,11 @@ export class SignUpComponent extends Component {
         })
             .then((res) => {
                 alert("You have been successfully registered as a user")
+                this.props.navigation.navigate('LogIn')
+            })
+            .catch((error) => {
+                alert(error.message)
+
             })
     }
     render() {

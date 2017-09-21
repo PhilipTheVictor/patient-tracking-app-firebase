@@ -1,4 +1,4 @@
-import { MainComponent, SearchByDateComponent, SearchByNameComponent, DashboardComponent } from './containers/'
+import { MainComponent, DashboardComponent } from './containers/'
 import { RegisterComponent,PatientsList,LogInComponent,SignUpComponent } from './components/'
 
 
@@ -7,8 +7,6 @@ export {
     PatientsList,
     LogInComponent,
     SignUpComponent,
-    SearchByDateComponent,
-    SearchByNameComponent,
     MainComponent,
     RegisterComponent
 }

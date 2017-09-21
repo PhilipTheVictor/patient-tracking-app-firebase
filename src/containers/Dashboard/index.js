@@ -20,18 +20,6 @@ export class DashboardComponent extends Component {
                             </Button>
                         </CardSection>
                         <CardSection>
-                            <Button onPress={() => navigate('SearchN')}>
-                                Search By Name
-                        {/* <Image source={require('./icon2.png')} style={styles.img} /> */}
-                            </Button>
-                        </CardSection>
-                        <CardSection>
-                            <Button onPress={() => navigate('SearchD')}>
-                                Search By Date
-                        {/* <Image source={require('./icon3.png')} style={styles.img} /> */}
-                            </Button>
-                        </CardSection>
-                        <CardSection>
                             <Button onPress={() => navigate('PatientsList')}>
                                 Patient List
                         {/* <Image source={require('./icon3.png')} style={styles.img} /> */}
