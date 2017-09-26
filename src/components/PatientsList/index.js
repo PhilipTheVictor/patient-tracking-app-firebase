@@ -5,9 +5,6 @@ import { Container, Content, List, Card, CardItem, ListItem, Body, Text, Button,
 import firebase from 'firebase'
 
 export class PatientsList extends Component {
-    static navigationOptions = {
-        header: false,
-    }
     constructor(props) {
         super(props);
         console.disableYellowBox = true;
@@ -82,7 +79,7 @@ export class PatientsList extends Component {
         const { navigate } = this.props.navigation;
         console.log(this.state.arrdata)
         return (
-            <Container>
+            <Container style={{ backgroundColor:'#ff3232'}}>
                 <Content>
                 <InputGroup>
                         <Input onChangeText={(date) => this.searchByDate(date)} placeholder="Search By Date"/>

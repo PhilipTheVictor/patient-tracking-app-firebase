@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text, AsyncStorage,TouchableOpacity } from 'react-native'
-import { CardSection, Button, Input } from '../.././common'
+import { AsyncStorage,TouchableOpacity } from 'react-native'
+import { Container,Content,Text,Button,Form,Item,Label,Input} from 'native-base'
 import firebase from 'firebase'
 
 export class SignUpComponent extends Component {
@@ -12,6 +12,7 @@ export class SignUpComponent extends Component {
     }
 
     saveData() {
+        if(this.state.name && this.state.email && this.state.password !== ''){
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch((error) => {
             console.log("User Registered")
             console.log(email, password)
@@ -23,39 +24,40 @@ export class SignUpComponent extends Component {
             .catch((error) => {
                 alert(error.message)
 
-            })
+            })}
+            else {
+                alert('Please fill empty fields')
+            }
     }
     render() {
         const { navigate } = this.props.navigation;
-        return (<View>
-            <CardSection><Input
+        return (<Container style={{ backgroundColor:'#ff3232'}}>
+            <Content>
+            <Form>
+                <Item floatingLabel>
+            <Label>Enter your name</Label><Input
                 onChangeText={(name) => { this.setState({ name }) }}
-                placeholder="Enter your name"
-                label="Name"
                 value={this.state.name}
-            /></CardSection>
-            <CardSection><Input
-                placeholder="Enter your email"
+            /></Item>
+            <Item floatingLabel>
+                <Label>Enter your email</Label>
+            <Input
                 onChangeText={(email) => { this.setState({ email }) }}
-                label="Email"
                 value={this.state.email}
-            /></CardSection>
-            <CardSection><Input
-                placeholder="Enter your password"
+            /></Item>
+            <Item floatingLabel><Label>Enter password</Label><Input
                 onChangeText={(password) => { this.setState({ password }) }}
-                label="Password"
                 secureTextEntry={true}
                 value={this.state.password}
-            /></CardSection>
-            <CardSection>
-                <Button onPress={this.saveData}>
-                    Submit
+            /></Item>
+                <Button style={{marginLeft: 130,marginTop: 30}} onPress={this.saveData}>
+                    <Text>Submit</Text>
        </Button>
-            </CardSection>
-            <CardSection>
-                <TouchableOpacity><Text onPress={()=>navigate('LogIn')}>Already a member?LogIn Here</Text></TouchableOpacity>
-            </CardSection>
-        </View>
+    
+                <TouchableOpacity style={{marginLeft: 67,marginTop: 15}}><Text onPress={()=>navigate('LogIn')}>Already a member?LogIn Here</Text></TouchableOpacity>
+            </Form>
+            </Content>
+        </Container>
         )
     }
 }

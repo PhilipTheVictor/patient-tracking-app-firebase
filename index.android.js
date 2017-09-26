@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, View } from 'react-native';
+import { AppRegistry,Image } from 'react-native';
+import { Container, Card, CardItem,Button,Text } from 'native-base';
 import { StackNavigator, TabNavigator } from 'react-navigation'
-import { LogInComponent, SignUpComponent, PatientsList, MainComponent, DashboardComponent, RegisterComponent } from './src'
-import { CardSection, Button, Card } from './src/common'
+import { LogInComponent, SignUpComponent, PatientsList, DashboardComponent, RegisterComponent } from './src'
 import firebase from 'firebase'
 
 // Initialize Firebase
@@ -23,20 +23,25 @@ export default class ptafirebase extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View>
-        <CardSection>
-          <Button onPress={() => navigate('Home')}>
-            Get Started!
+      <Container style={{ backgroundColor:'#ff3232'}}>
+        
+        <Image
+            style={{
+              flex: 1,
+              height: 250,width: null, flex: 1
+            }}
+            source={require('./checklist.png')}
+          />
+          <Button style={{ marginLeft: 110,marginBottom: 20 }}onPress={() => navigate('SignUp')}>
+           <Text> Get Started!</Text>
        </Button>
-        </CardSection>
-      </View>
+      </Container>
     );
   }
 }
 
 const SimpleApp = StackNavigator({
-  Main: { screen: ptafirebase },
-  Home: { screen: DashboardComponent },
+  Main: { screen: DashboardComponent },
   Dashboard: { screen: DashboardComponent },
   Reg: { screen: RegisterComponent },
   PatientsList: { screen: PatientsList },

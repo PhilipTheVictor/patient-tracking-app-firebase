@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text, AsyncStorage, TouchableOpacity } from 'react-native'
-import { CardSection, Button, Input } from '../.././common'
+import { AsyncStorage, TouchableOpacity } from 'react-native'
 import firebase from 'firebase'
+import { Container, Content, Text,Button,Card,CardItem,Input,Form,Label,Item } from 'native-base'
 
 export class LogInComponent extends Component {
 
@@ -15,6 +15,7 @@ export class LogInComponent extends Component {
     }
 
     logInUser() {
+        if(this.state.email && this.state.password !== '') {
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).catch((error) => {
             alert(error.message)
         })
@@ -22,38 +23,42 @@ export class LogInComponent extends Component {
                 alert("You have successfully logged in")
 
                 this.props.navigation.navigate('Dashboard')
-            })
+            })}
+            else{
+                alert("Please fill empty fields")
+            }
     }
     render() {
         const { navigate } = this.props.navigation;
-        return (<View>
-            <CardSection><Input
-                placeholder="Enter your Email"
+        return (<Container style={{ backgroundColor:'#ff3232'}}>
+            <Form>
+                <Item floatingLabel>
+                <Label>Enter your email</Label>
+            <Input
                 onChangeText={(email) => {
                     this.setState({
                         email
                     })
                 }}
-                label="Email"
                 value={this.state.email}
             />
-            </CardSection>
-            <CardSection><Input
-                placeholder="Enter your password"
+            </Item>
+            <Item floatingLabel>
+            <Label>Enter your password</Label>
+            <Input
                 onChangeText={(password) => { this.setState({ password }) }}
-                label="Password"
                 secureTextEntry={true}
                 value={this.state.password}
-            /></CardSection>
-            <CardSection>
-                <Button onPress={this.logInUser}>
-                    Submit
+            />
+            </Item>
+                <Button style={{marginLeft: 130,marginTop: 30}}onPress={this.logInUser}>
+                    <Text>Submit</Text>
        </Button>
-            </CardSection>
-            <CardSection>
-                <TouchableOpacity><Text onPress={() => navigate('SignUp')}>Not a member? Sign Up Here</Text></TouchableOpacity>
-            </CardSection>
-        </View>
+            
+            
+                <TouchableOpacity style={{marginLeft: 67,marginTop: 15}}><Text onPress={() => navigate('SignUp')}>Not a member? Sign Up Here</Text></TouchableOpacity>
+            </Form>
+        </Container>
         )
     }
 }

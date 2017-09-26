@@ -1,4 +1,4 @@
-import { MainComponent, DashboardComponent } from './containers/'
+import { DashboardComponent } from './containers/'
 import { RegisterComponent,PatientsList,LogInComponent,SignUpComponent } from './components/'
 
 
@@ -7,6 +7,5 @@ export {
     PatientsList,
     LogInComponent,
     SignUpComponent,
-    MainComponent,
     RegisterComponent
 }

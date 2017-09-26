@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text, AsyncStorage } from 'react-native'
-import { CardSection, Button, Input } from '../.././common'
+import { AsyncStorage } from 'react-native'
+import { Container, Content, Input,Label,Item,Text,Button,Form } from 'native-base'
 import firebase from 'firebase'
 
 export class RegisterComponent extends Component {
@@ -36,37 +36,39 @@ export class RegisterComponent extends Component {
     }
     render() {
         const { navigate } = this.props.navigation;
-        return (<View>
-            <CardSection><Input
+        return (<Container style={{ backgroundColor:'#ff3232'}}>
+            <Form>
+                <Item floatingLabel>
+                <Label>Enter name here</Label>
+                <Input
                 onChangeText={(name) => { this.setState({ name }) }}
-                placeholder="Enter patient's name"
-                label="Name"
+                
+        
                 value={this.state.name}
-            /></CardSection>
-            <CardSection><Input
-                placeholder="Enter patient's Email"
+            /></Item>
+            <Item floatingLabel>
+                <Label>Enter email here</Label>
+            <Input
                 onChangeText={(email) => { this.setState({ email }) }}
-                label="Email"
                 value={this.state.email}
-            /></CardSection>
-            <CardSection><Input
-                placeholder="Enter patient's disease"
+            /></Item>
+            <Item floatingLabel>
+                <Label>Enter disease</Label><Input
                 onChangeText={(disease) => { this.setState({ disease }) }}
-                label="Disease"
                 value={this.state.disease}
-            /></CardSection>
-            <CardSection><Input
-                placeholder="Enter patient's age"
+            /></Item>
+            <Item floatingLabel>
+                <Label>Enter age here</Label>
+                <Input
                 onChangeText={(age) => { this.setState({ age }) }}
                 value={this.state.age}
                 label="Age"
-            /></CardSection>
-            <CardSection>
+            /></Item>
                 <Button onPress={this.saveData}>
-                    Submit
+                    <Text>Submit</Text>
        </Button>
-            </CardSection>
-        </View>
+        </Form>
+        </Container>
         )
     }
 }
