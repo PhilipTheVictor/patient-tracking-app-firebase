@@ -13,6 +13,8 @@ export class PatientsList extends Component {
         this.state = {
             normalState: true,
             filterState: false,
+            searchedVal:'',
+            filterData: [],
             arrdata: []
         }
     }
@@ -23,7 +25,6 @@ export class PatientsList extends Component {
             let arrayToPushedData = this.state.arrdata;
             arrayToPushedData.push(snap.val());
             this.setState({
-                status: true,
                 arrdata: arrayToPushedData,
                 // backupData: arrayToPushedData
             })
@@ -31,7 +32,7 @@ export class PatientsList extends Component {
     }
 
     searchByName(text) {
-        arrayToPushedData = this.state.arrdata;
+        let arrayToPushedData = this.state.arrdata;
         this.setState({ searchedVal: text })
         arrayToPushedData = arrayToPushedData.filter((asset) => asset.name.toLowerCase().indexOf(text) !== -1);
 
@@ -52,24 +53,21 @@ export class PatientsList extends Component {
         }
     }
     searchByDate(date) {
-        this.setState({
-            date: date
-        })
-        arrayToPushedData = this.state.data;
+        arrayToPushedData = this.state.arrdata;
         this.setState({ date: date })
-       arrayToPushedData = arrayToPushedData.filter(asset => asset.date.indexOf(date) !== -1);
+       arrayToPushedData = arrayToPushedData.filter((asset) => asset.date.indexOf(date) !== -1);
 
         if (date == '') {
             this.setState({
-                normalStatus: true,
-                filterStatus: false
+                normalState: true,
+                filterState: false
             })
 
         }
         else {
             this.setState({
-                filterStatus: true,
-                normalStatus: false,
+                filterState: true,
+                normalState: false,
                 filterData: arrayToPushedData
             })
         }
@@ -82,23 +80,29 @@ export class PatientsList extends Component {
             <Container style={{ backgroundColor:'#ff3232'}}>
                 <Content>
                 <InputGroup>
-                        <Input onChangeText={(date) => this.searchByDate(date)} placeholder="Search By Date"/>
-                    </InputGroup>
-                    <InputGroup>
                         <Input onChangeText={(text) => this.searchByName(text)}  placeholder="Search By Name"/>
                     </InputGroup>
+                <InputGroup>
+                        <Input onChangeText={(date) => this.searchByDate(date)} placeholder="Search By Date"/>
+                    </InputGroup>
+                   
                     <List>
                         {this.state.normalState &&
                             this.state.arrdata.map((d, i) => {
                                 return (
+                                    <Card>
                                     <ListItem key={i}>
+                                        <CardItem>
                                         <Text>{d.name}</Text>
+                                        </CardItem>
+                                        <Body>
                                         <Text>{d.age}</Text>
                                         <Text>{d.email}</Text>
                                         <Text>{d.disease}</Text>
                                         <Text>{d.date}</Text>
+                                        </Body>
                                     </ListItem>
-
+</Card>
                                 )
                             })
 
@@ -106,14 +110,19 @@ export class PatientsList extends Component {
                             this.state.filterState &&
                             this.state.filterData.map((d, i) => {
                                 return (
+                                    <Card>
                                     <ListItem key={i}>
+                                       <CardItem>
                                         <Text>{d.name}</Text>
+                                        </CardItem>
+                                        <Body>
                                         <Text>{d.age}</Text>
                                         <Text>{d.email}</Text>
                                         <Text>{d.disease}</Text>
                                         <Text>{d.date}</Text>
+                                        </Body>
                                     </ListItem>
-
+</Card>
                                 )})
                             }
                     </List>
@@ -124,3 +133,6 @@ export class PatientsList extends Component {
     }
 }
 
+PatientsList.navigationOptions = {
+    title: "Patient's List"
+}
